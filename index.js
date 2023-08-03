@@ -20,6 +20,7 @@ if (process.argv.length<3) {
 const password = process.argv[2]
 
 const mongoUrl = `mongodb+srv://helsinkiFullstackBlogs:${password}@cluster0.uaexyx0.mongodb.net/?retryWrites=true&w=majority`
+
 mongoose.connect(mongoUrl)
 
 app.use(cors())
