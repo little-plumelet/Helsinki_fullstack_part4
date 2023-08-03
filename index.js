@@ -1,41 +1,12 @@
+require('dotenv').config()
 const express = require('express')
-const app = express()
 const cors = require('cors')
-const mongoose = require('mongoose')
+const Blog = require('./models/blog')
 
-const blogSchema = new mongoose.Schema({
-  title: String,
-  author: String,
-  url: String,
-  likes: Number
-})
-
-const Blog = mongoose.model('Blog', blogSchema)
-
-// Even though the _id property of Mongoose objects looks like a string, it is in fact an object.
-// The toJSON method we defined transforms it into a string just to be safe
-blogSchema.set('toJSON', {
-  transform: (document, returnedObject) => {
-    returnedObject.id = returnedObject._id.toString()
-    delete returnedObject._id
-    delete returnedObject.__v
-  }
-})
-
-if (process.argv.length<3) {
-  console.log('give password as argument')
-  process.exit(1)
-}
-
-const password = process.argv[2]
-
-const mongoUrl = `mongodb+srv://helsinkiFullstackBlogs:${password}@cluster0.uaexyx0.mongodb.net/?retryWrites=true&w=majority`
-
-mongoose.connect(mongoUrl)
+const app = express()
 
 app.use(cors())
 app.use(express.json())
-
 
 app.get('/api/blogs', (request, response) => {
   Blog
@@ -55,7 +26,7 @@ app.post('/api/blogs', (request, response) => {
     })
 })
 
-const PORT = 3003
+const PORT = process.env.PORT
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`)
 })

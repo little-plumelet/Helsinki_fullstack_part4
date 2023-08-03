@@ -4,4 +4,6 @@
 #vscode
 /.vscode
 
+.env
+
 /requests
