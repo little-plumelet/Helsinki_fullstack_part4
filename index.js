@@ -12,6 +12,16 @@ const blogSchema = new mongoose.Schema({
 
 const Blog = mongoose.model('Blog', blogSchema)
 
+// Even though the _id property of Mongoose objects looks like a string, it is in fact an object.
+// The toJSON method we defined transforms it into a string just to be safe
+blogSchema.set('toJSON', {
+  transform: (document, returnedObject) => {
+    returnedObject.id = returnedObject._id.toString()
+    delete returnedObject._id
+    delete returnedObject.__v
+  }
+})
+
 if (process.argv.length<3) {
   console.log('give password as argument')
   process.exit(1)
@@ -25,6 +35,7 @@ mongoose.connect(mongoUrl)
 
 app.use(cors())
 app.use(express.json())
+
 
 app.get('/api/blogs', (request, response) => {
   Blog
