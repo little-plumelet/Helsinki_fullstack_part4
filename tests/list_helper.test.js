@@ -95,9 +95,22 @@ describe('most likes', () => {
     expect(result.likes).toBe(0)
   })
 
-  test('of list is find right blog', () => {
+  test('of list is found the right blog', () => {
     const result = listHelper.mostLikes(blogs)
     expect(result.author).toBe('Edsger W. Dijkstra')
     expect(result.likes).toBe(12)
+  })
+})
+
+describe('favouriteBlog', () => {
+  test('of empty list is undefined', () => {
+    const result = listHelper.favoriteBlog([])
+    expect(result).toBe(undefined)
+  })
+
+  test('of list is found the right blog', () => {
+    const right = blogs[2]
+    const result = listHelper.favoriteBlog(blogs)
+    expect(result).toEqual(right)
   })
 })
