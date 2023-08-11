@@ -8,7 +8,22 @@ const totalLikes = (blogs) => {
   }, 0)
 }
 
+const mostLikes = (blogs) => {
+  const favourit = {
+    author: '',
+    likes: 0
+  }
+  blogs.forEach(blog => {
+    if (blog.likes > favourit.likes) {
+      favourit.author = blog.author
+      favourit.likes = blog.likes
+    }
+  })
+  return favourit
+}
+
 module.exports = {
   dummy,
-  totalLikes
+  totalLikes,
+  mostLikes
 }

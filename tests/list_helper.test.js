@@ -87,3 +87,17 @@ describe('total likes', () => {
     expect(result).toBe(36)
   })
 })
+
+describe('most likes', () => {
+  test('of empty list is nullish marks', () => {
+    const result = listHelper.mostLikes([])
+    expect(result.author).toBe('')
+    expect(result.likes).toBe(0)
+  })
+
+  test('of list is find right blog', () => {
+    const result = listHelper.mostLikes(blogs)
+    expect(result.author).toBe('Edsger W. Dijkstra')
+    expect(result.likes).toBe(12)
+  })
+})
