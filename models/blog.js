@@ -3,7 +3,7 @@ const mongoose = require('mongoose')
 const mongoUrl = process.env.MONGODB_URI
 
 mongoose.connect(mongoUrl)
-  .then(result => {
+  .then(() => {
     console.log('connected to MongoDB')
   })
   .catch((error) => {
@@ -17,7 +17,7 @@ const blogSchema = new mongoose.Schema({
   likes: Number
 })
 
-const Blog = mongoose.model('Blog', blogSchema)
+// const Blog = mongoose.model('Blog', blogSchema)
 
 // Even though the _id property of Mongoose objects looks like a string, it is in fact an object.
 // The toJSON method we defined transforms it into a string just to be safe
